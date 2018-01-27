@@ -3,7 +3,7 @@ version '0.1.0'
 
 buildscript {
     ext.versions = [
-            springboot: "1.5.7.RELEASE",
+            springboot: "1.5.9.RELEASE",
     ]
 
     ext.pluginDependencies = [
@@ -30,6 +30,7 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: versions.springboot
 
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: versions.springboot
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 

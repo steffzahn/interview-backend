@@ -1,0 +1,81 @@
+html, body{
+    border:0;
+    margin:0;
+    padding:0;
+    font-family:Arial;
+}
+
+h1{
+    margin:0;
+    margin-bottom:0.5em;
+}
+
+div, th, td, input, button{
+    font-size:12px !important;
+}
+
+body{
+    padding:1em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border:1px solid #999;
+} 
+
+th, td{
+    padding:6px;
+    text-align:center;
+}
+
+table, table table table {
+    background:#f0f0f0;
+}
+table table, table table table table {
+    background:#ffffff;
+}
+
+div.container{
+    position:relative;
+}
+
+button, input{
+    margin-left:1em;
+    padding:6px;
+}
+
+button.closeButton{
+    position:absolute;
+    top:-7px;
+    right:-7px;
+    margin:0;
+    padding:0;
+    padding-top:-4px;
+    width:16px;
+    height:16px;
+    border:1px solid #999;
+    color:#fff;
+    background:#999;
+    font-weight:bold;
+    border-radius:0;
+}
+
+button.closeButton span{
+    margin-left:-4px;
+    margin-top:-2px;
+}
+
+.stateOk{
+    background: #AAFF00;
+}
+
+.stateWarn{
+    background: #FFFF00;
+}
+
+.stateErr{
+    background: #FF5A5A;
+}
