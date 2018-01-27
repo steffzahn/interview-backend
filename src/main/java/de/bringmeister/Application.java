@@ -1,12 +1,18 @@
 package de.bringmeister;
 
+import de.bringmeister.model.Catalog;
+import de.bringmeister.model.ModelException;
+import de.bringmeister.model.io.PriceReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
 
 @Configuration
 @ComponentScan
@@ -15,7 +21,22 @@ public class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    public static void main(final String[] args) {
+    @Autowired
+    private Catalog catalog;
+
+    private void loadCatalog() throws ModelException
+    {
+        catalog.setPrices(PriceReader.readFromResource("/products/prices.json") );
+    }
+
+    @PostConstruct
+    public void init() throws ModelException
+    {
+        loadCatalog();
+    }
+
+    public static void main(final String[] args) throws ModelException
+    {
 
         LOG.info("Application.main(): started");
 

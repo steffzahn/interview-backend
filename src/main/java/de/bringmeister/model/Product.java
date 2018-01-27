@@ -1,7 +1,13 @@
 package de.bringmeister.model;
 
 public class Product {
-    public Product(String name, String sku, String description) {
+    public Product(String name, String sku, String description) throws ModelException
+    {
+        if( (name == null) || (name.length()==0)
+            || (sku==null) || (sku.length()==0) )
+        {
+            throw new ModelException("Product.Product(): name and sku must be non-empty strings");
+        }
         this.name = name;
         this.sku = sku;
         this.description = description;
@@ -31,5 +37,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", sku='" + sku + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
