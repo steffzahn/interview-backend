@@ -53,10 +53,11 @@ public class Catalog {
         {
             if( p == null )
                 throw new ModelException("Catalog.setPrices(): null pointer in list");
-            CatalogKey key = new CatalogKey(p.getSku(), p.getUnit() );
-            if( !skuProductMap.containsKey( key ) )
+            String sku = p.getSku();
+            CatalogKey key = new CatalogKey( sku, p.getUnit() );
+            if( !skuProductMap.containsKey( sku ) )
             {
-                LOG.error("Catalog.setPrices(): unknown sku, unit "+key);
+                LOG.warn("Catalog.setPrices(): skipping unknown sku "+sku);
             }
             skuPriceMap.put( key, p );
         }

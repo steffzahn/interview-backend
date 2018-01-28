@@ -3,6 +3,7 @@ package de.bringmeister;
 import de.bringmeister.model.Catalog;
 import de.bringmeister.model.ModelException;
 import de.bringmeister.model.io.PriceReader;
+import de.bringmeister.model.io.ProductReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,10 @@ public class Application {
 
     private void loadCatalog() throws ModelException
     {
+        LOG.info("Application.loadCatalog(): started");
+        catalog.addProducts(ProductReader.readFromResource("/products/products.xml"), false );
         catalog.setPrices(PriceReader.readFromResource("/products/prices.json") );
+        LOG.info("Application.loadCatalog(): finished");
     }
 
     @PostConstruct
