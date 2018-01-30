@@ -1,9 +1,13 @@
 package de.bringmeister.model;
 
+import de.bringmeister.model.json.JsonProductList;
+import de.bringmeister.model.json.JsonProductPrice;
+import de.bringmeister.model.json.JsonProductWithAllPrices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,4 +66,40 @@ public class Catalog {
             skuPriceMap.put( key, p );
         }
     }
+
+    public synchronized JsonProductList listAll()
+    {
+        ArrayList<JsonProductWithAllPrices> resultList = new ArrayList<>();
+        for( Product p : skuProductMap.values() )
+        {
+            resultList.add( new JsonProductWithAllPrices(p) );
+        }
+        return new JsonProductList( resultList );
+    }
+
+    public synchronized JsonProductWithAllPrices showProduct(String sku)
+    {
+        Product p = skuProductMap.get(sku);
+        if( p!=null )
+        {
+            return new JsonProductWithAllPrices(p);
+        }
+        return null;
+    }
+
+    public synchronized JsonProductPrice showPrice(String sku, String unitStr)
+    {
+        Unit unit = null;
+        try {
+            unit = Unit.valueOf(unitStr.toUpperCase() );
+        } catch( Exception ignore ) { }
+        CatalogKey key = new CatalogKey( sku, unit );
+        Price price = skuPriceMap.get( key );
+        if( price != null )
+        {
+            return new JsonProductPrice(price);
+        }
+        return null;
+    }
+
 }
