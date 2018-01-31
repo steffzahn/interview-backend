@@ -2,6 +2,8 @@ package de.bringmeister.model.json;
 
 import de.bringmeister.model.Product;
 
+import java.util.ArrayList;
+
 public class JsonProductWithAllPrices {
     public JsonProductWithAllPrices(String name, String sku, String description) {
         this.name = name;
@@ -19,6 +21,7 @@ public class JsonProductWithAllPrices {
     private String name;
     private String sku;
     private String description;
+    private ArrayList<JsonProductPrice> priceList;
 
     public String getName() {
         return name;
@@ -44,12 +47,21 @@ public class JsonProductWithAllPrices {
         this.description = description;
     }
 
+    public ArrayList<JsonProductPrice> getPriceList() {
+        return priceList;
+    }
+
+    public void setPriceList(ArrayList<JsonProductPrice> priceList) {
+        this.priceList = priceList;
+    }
+
     @Override
     public String toString() {
         return "JsonProductWithAllPrices{" +
                 "name='" + name + '\'' +
                 ", sku='" + sku + '\'' +
                 ", description='" + description + '\'' +
+                ", priceList=" + priceList +
                 '}';
     }
 }

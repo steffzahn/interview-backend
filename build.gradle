@@ -3,7 +3,7 @@ version '0.1.0'
 
 buildscript {
     ext.versions = [
-            springboot: "1.5.9.RELEASE",
+            springboot: "1.5.10.RELEASE",
     ]
 
     ext.pluginDependencies = [

@@ -82,7 +82,21 @@ public class Catalog {
         Product p = skuProductMap.get(sku);
         if( p!=null )
         {
-            return new JsonProductWithAllPrices(p);
+            JsonProductWithAllPrices result = new JsonProductWithAllPrices(p);
+            ArrayList<JsonProductPrice> priceList = new ArrayList<>();
+            for( Unit unit : Unit.values() )
+            {
+                CatalogKey key = new CatalogKey(sku, unit);
+                Price price = skuPriceMap.get(key);
+                if (price != null) {
+                    priceList.add( new JsonProductPrice(price, unit) );
+                }
+            }
+            if( priceList.size()>0 )
+            {
+                result.setPriceList(priceList);
+            }
+            return result;
         }
         return null;
     }
@@ -93,11 +107,12 @@ public class Catalog {
         try {
             unit = Unit.valueOf(unitStr.toUpperCase() );
         } catch( Exception ignore ) { }
-        CatalogKey key = new CatalogKey( sku, unit );
-        Price price = skuPriceMap.get( key );
-        if( price != null )
-        {
-            return new JsonProductPrice(price);
+        if( unit!=null ) {
+            CatalogKey key = new CatalogKey(sku, unit);
+            Price price = skuPriceMap.get(key);
+            if (price != null) {
+                return new JsonProductPrice(price, unitStr);
+            }
         }
         return null;
     }
