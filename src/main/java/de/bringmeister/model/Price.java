@@ -10,17 +10,18 @@ public class Price {
         this.currency = currency;
         this.unit = unit;
     }
-    public Price(JsonPrice jp) throws ModelException
+    // use RuntimeException in case of error to allow usage in Stream<>.map
+    public Price(JsonPrice jp)
     {
         sku = jp.getId();
         if( (sku==null) || (sku.length()==0) )
-            throw new ModelException("Price.Price(): sku missing or empty");
+            throw new RuntimeException("Price.Price(): sku missing or empty");
         JsonPriceDetail jpd = jp.getPrice();
         if( jpd==null )
-            throw new ModelException("Price.Price(): price missing");
+            throw new RuntimeException("Price.Price(): price missing");
         float priceFloat = jpd.getValue();
         if( priceFloat < 0.0  )
-            throw new ModelException("Price.Price(): price is negative");
+            throw new RuntimeException("Price.Price(): price is negative");
         price = (int)( priceFloat * 100);
         String currency = jpd.getCurrency();
         try {
@@ -31,7 +32,7 @@ public class Price {
             this.currency = null;
         }
         if( this.currency == null ) {
-            throw new ModelException("Price.Price(): currency is null or empty, or an unknown currency");
+            throw new RuntimeException("Price.Price(): currency is null or empty, or an unknown currency");
         }
         String unit = jp.getUnit();
         try {
@@ -42,7 +43,7 @@ public class Price {
             this.unit = null;
         }
         if( this.unit == null ) {
-            throw new ModelException("Price.Price(): unit is null or empty, or an unknown unit");
+            throw new RuntimeException("Price.Price(): unit is null or empty, or an unknown unit");
         }
     }
 

@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PriceReader {
     private static final Logger LOG = LoggerFactory.getLogger(PriceReader.class);
@@ -32,23 +33,16 @@ public class PriceReader {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder sb = new StringBuilder(1000);
             sb.append("{\"list\": ");
-            for (; ; ) {
-                String line;
-                line = reader.readLine();
-                if (line == null)
-                    break;
-                sb.append(line).append('\n');
-            }
-            sb.append("}\n");
+            sb.append(
+                    reader.lines()
+                    .collect( Collectors.joining("\n") ));
+            sb.append("\n}\n");
             JsonPriceList jpl = (JsonPriceList)objectMapper.readValue(sb.toString(), JsonPriceList.class);
-            List<Price> result = new ArrayList<>();
-            for( JsonPrice jp : jpl.getList() )
-            {
-                result.add(new Price(jp));
-            }
-            return result;
-        } catch (IOException e) {
-            throw new ModelException("PriceReader.readFromResource(): failed to read due to IOException", e);
+            return jpl.getList().stream()
+                    .map( jp -> new Price(jp))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new ModelException("PriceReader.readFromResource(): failed to read due to Exception", e);
         }
     }
 }
