@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class Catalog {
@@ -72,14 +69,20 @@ public class Catalog {
         Product p = skuProductMap.get(sku);
         if (p != null) {
             JsonProductWithAllPrices result = new JsonProductWithAllPrices(p);
-            ArrayList<JsonProductPrice> priceList = new ArrayList<>();
-            for (Unit unit : Unit.values()) {
-                CatalogKey key = new CatalogKey(sku, unit);
-                Price price = skuPriceMap.get(key);
-                if (price != null) {
-                    priceList.add(new JsonProductPrice(price, unit));
-                }
-            }
+            ArrayList<JsonProductPrice> priceList =
+            Arrays.stream(Unit.values())
+                .collect(
+                         ArrayList<JsonProductPrice>::new,
+                        (pl, unit) ->
+                        {
+                            CatalogKey key = new CatalogKey(sku, unit);
+                            Price price = skuPriceMap.get(key);
+                            if (price != null) {
+                                pl.add(new JsonProductPrice(price, unit));
+                            }
+                        },
+                         ArrayList<JsonProductPrice>::addAll
+                    );
             if (priceList.size() > 0) {
                 result.setPriceList(priceList);
             }
