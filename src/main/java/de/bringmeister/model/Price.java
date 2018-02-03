@@ -15,13 +15,13 @@ public class Price {
     {
         sku = jp.getId();
         if( (sku==null) || (sku.length()==0) )
-            throw new RuntimeException("Price.Price(): sku missing or empty");
+            throw new ModelException("Price.Price(): sku missing or empty");
         JsonPriceDetail jpd = jp.getPrice();
         if( jpd==null )
-            throw new RuntimeException("Price.Price(): price missing");
+            throw new ModelException("Price.Price(): price missing");
         float priceFloat = jpd.getValue();
         if( priceFloat < 0.0  )
-            throw new RuntimeException("Price.Price(): price is negative");
+            throw new ModelException("Price.Price(): price is negative");
         price = (int)( priceFloat * 100);
         String currency = jpd.getCurrency();
         try {
@@ -32,7 +32,7 @@ public class Price {
             this.currency = null;
         }
         if( this.currency == null ) {
-            throw new RuntimeException("Price.Price(): currency is null or empty, or an unknown currency");
+            throw new ModelException("Price.Price(): currency is null or empty, or an unknown currency");
         }
         String unit = jp.getUnit();
         try {
@@ -43,7 +43,7 @@ public class Price {
             this.unit = null;
         }
         if( this.unit == null ) {
-            throw new RuntimeException("Price.Price(): unit is null or empty, or an unknown unit");
+            throw new ModelException("Price.Price(): unit is null or empty, or an unknown unit");
         }
     }
 

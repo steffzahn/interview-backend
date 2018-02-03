@@ -12,17 +12,11 @@ public class JsonProductPrice {
     }
     public JsonProductPrice() {
     }
-    public JsonProductPrice( Price p, String unitStr ) {
+    public JsonProductPrice( Price p ) {
         int priceValue = p.getPrice();
         value = String.format( "%d.%02d", priceValue / 100, priceValue % 100);
         currency = p.getCurrency().name();
-        unit = unitStr;
-    }
-    public JsonProductPrice( Price p, Unit unit ) {
-        int priceValue = p.getPrice();
-        value = String.format( "%d.%02d", priceValue / 100, priceValue % 100);
-        currency = p.getCurrency().name();
-        this.unit = unit.name();
+        this.unit = p.getUnit().name();
     }
 
     private String value;
