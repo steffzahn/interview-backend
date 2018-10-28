@@ -78,32 +78,35 @@ public class ProductReader {
                     String s = ev.asStartElement().getName().getLocalPart();
                     if( (s==null) || (s.length()==0) )
                         throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
-                    if (s.equals("Products")) {
-                        if( insideProductsList )
-                            throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
-                        insideProductsList=true;
-                    } else if( s.equals("Product") )
-                    {
-                        if( !insideProductsList || insideProduct )
-                            throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
-                        insideProduct = true;
-                    } else if( s.equals("Name") )
-                    {
-                        if( !insideProduct || insideName )
-                            throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
-                        insideName = true;
-                    } else if( s.equals("sku") )
-                    {
-                        if( !insideProduct || insideName || insideDescription || insideSku )
-                            throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
-                        insideSku = true;
-                    } else if( s.equals("Description") )
-                    {
-                        if( !insideProduct || insideName || insideDescription || insideSku )
-                            throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
-                        insideDescription = true;
-                    } else {
-                        LOG.info("DEBUG START " + s);
+                    switch (s) {
+                        case "Products":
+                            if (insideProductsList)
+                                throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
+                            insideProductsList = true;
+                            break;
+                        case "Product":
+                            if (!insideProductsList || insideProduct)
+                                throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
+                            insideProduct = true;
+                            break;
+                        case "Name":
+                            if (!insideProduct || insideName)
+                                throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
+                            insideName = true;
+                            break;
+                        case "sku":
+                            if (!insideProduct || insideName || insideDescription || insideSku)
+                                throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
+                            insideSku = true;
+                            break;
+                        case "Description":
+                            if (!insideProduct || insideName || insideDescription || insideSku)
+                                throw new ModelException("ProductReader.readFromResource(): malformed XML input read from resource");
+                            insideDescription = true;
+                            break;
+                        default:
+                            LOG.info("DEBUG START " + s);
+                            break;
                     }
                 } else if( ev.isCharacters() ) {
                     String s = ev.asCharacters().getData();

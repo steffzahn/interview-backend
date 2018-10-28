@@ -4,6 +4,7 @@ import de.bringmeister.model.json.JsonPrice;
 import de.bringmeister.model.json.JsonPriceDetail;
 
 public class Price {
+    @SuppressWarnings("unused")
     public Price(String sku, int price, Currency currency, Unit unit) {
         this.sku = sku;
         this.price = price;
@@ -52,7 +53,7 @@ public class Price {
     private Currency currency;
     private Unit unit;
 
-    public String getSku() {
+    String getSku() {
         return sku;
     }
 

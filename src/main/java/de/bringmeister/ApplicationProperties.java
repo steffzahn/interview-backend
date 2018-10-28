@@ -9,10 +9,12 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(value = "de.bringmeister")
 public class ApplicationProperties {
 
+    @SuppressWarnings("unused")
     public int getHttpPort() {
         return httpPort;
     }
 
+    @SuppressWarnings("unused")
     public void setHttpPort(int httpPort) {
         this.httpPort = httpPort;
     }

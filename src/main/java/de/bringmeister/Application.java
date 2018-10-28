@@ -22,6 +22,7 @@ public class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
+    @SuppressWarnings("unused")
     @Autowired
     private Catalog catalog;
 

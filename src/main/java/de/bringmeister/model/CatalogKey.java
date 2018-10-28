@@ -3,7 +3,7 @@ package de.bringmeister.model;
 import java.util.Objects;
 
 public class CatalogKey {
-    public CatalogKey(String sku, Unit unit) {
+    CatalogKey(String sku, Unit unit) {
         this.sku = sku;
         this.unit = unit;
     }
@@ -11,6 +11,7 @@ public class CatalogKey {
     private String sku;
     private Unit unit;
 
+    @SuppressWarnings("unused")
     public String getSku() {
         return sku;
     }

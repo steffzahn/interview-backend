@@ -18,8 +18,8 @@ public class Catalog {
     private Map<String, Product> skuProductMap;
 
     public Catalog() {
-        skuPriceMap = Collections.synchronizedMap( new HashMap<CatalogKey, Price>() );
-        skuProductMap = Collections.synchronizedMap( new HashMap<String, Product>() );
+        skuPriceMap = Collections.synchronizedMap(new HashMap<>());
+        skuProductMap = Collections.synchronizedMap(new HashMap<>());
     }
 
     public synchronized void clear() {
@@ -31,42 +31,41 @@ public class Catalog {
         if (list == null)
             throw new ModelException("Catalog.addProducts(): missing mandatory parameter list");
         list.stream()
-                .map( Objects::requireNonNull )
-                .filter( p ->
+                .map(Objects::requireNonNull)
+                .filter(p ->
                 {
                     if (!merge && skuProductMap.containsKey(p.getSku())) {
                         throw new ModelException("Catalog.addProducts(): duplicate sku value");
                     }
                     return true;
                 })
-                .forEach( p -> { skuProductMap.put(p.getSku(), p); } );
+                .forEach(p -> skuProductMap.put(p.getSku(), p));
     }
 
     public synchronized void setPrices(List<Price> list) throws ModelException {
         if (list == null)
             throw new ModelException("Catalog.setPrices(): missing mandatory parameter list");
         list.stream()
-                .map( Objects::requireNonNull )
-                .forEach( p ->
+                .map(Objects::requireNonNull)
+                .forEach(p ->
                 {
                     String sku = p.getSku();
                     CatalogKey key = new CatalogKey(sku, p.getUnit());
-                    if (!skuProductMap.containsKey(sku))
-                    {
+                    if (!skuProductMap.containsKey(sku)) {
                         LOG.warn("Catalog.setPrices(): skipping unknown sku " + sku);
                     } else {
                         skuPriceMap.put(key, p);
                     }
-                } );
+                });
     }
 
     public synchronized JsonProductList listAll() {
         return new JsonProductList(
                 skuProductMap.values().stream()
                         .map(JsonProductWithAllPrices::new)
-                        .collect(ArrayList<JsonProductWithAllPrices>::new,
-                                ArrayList<JsonProductWithAllPrices>::add,
-                                ArrayList<JsonProductWithAllPrices>::addAll));
+                        .collect(ArrayList::new,
+                                ArrayList::add,
+                                ArrayList::addAll));
     }
 
     public synchronized JsonProductWithAllPrices showProduct(String sku) {
@@ -75,14 +74,14 @@ public class Catalog {
             JsonProductWithAllPrices result = new JsonProductWithAllPrices(p);
             ArrayList<JsonProductPrice> priceList =
                     Arrays.stream(Unit.values())
-                            .map( u -> new CatalogKey(sku, u) )
-                            .map( k -> skuPriceMap.get(k))
-                            .filter( Objects::nonNull )
-                            .map( JsonProductPrice::new )
+                            .map(u -> new CatalogKey(sku, u))
+                            .map(k -> skuPriceMap.get(k))
+                            .filter(Objects::nonNull)
+                            .map(JsonProductPrice::new)
                             .collect(
-                                    ArrayList<JsonProductPrice>::new,
-                                    ArrayList<JsonProductPrice>::add,
-                                    ArrayList<JsonProductPrice>::addAll
+                                    ArrayList::new,
+                                    ArrayList::add,
+                                    ArrayList::addAll
                             );
             if (priceList.size() > 0) {
                 result.setPriceList(priceList);

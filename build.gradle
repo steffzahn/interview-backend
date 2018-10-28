@@ -29,6 +29,8 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: versions.springboot
+    // https://mvnrepository.com/artifact/org.jetbrains/annotations
+	compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: versions.springboot
     testCompile group: 'junit', name: 'junit', version: '4.12'
