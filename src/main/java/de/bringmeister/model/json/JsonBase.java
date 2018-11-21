@@ -8,6 +8,7 @@ public class JsonBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(JsonBase.class);
 
+    @SuppressWarnings("unused")
     @JsonAnySetter
     public void setAny( String name, Object value )
     {

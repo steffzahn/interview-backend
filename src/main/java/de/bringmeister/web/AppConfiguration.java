@@ -15,6 +15,7 @@ public class AppConfiguration {
         LOG.info("AppConfiguration.AppConfiguration() started");
     }
 
+    @SuppressWarnings("unused")
     @Autowired
     private ApplicationProperties config;
 }

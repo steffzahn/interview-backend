@@ -34,6 +34,7 @@ public class Application {
         LOG.info("Application.loadCatalog(): finished");
     }
 
+    @SuppressWarnings("unused")
     @PostConstruct
     public void init() throws ModelException
     {

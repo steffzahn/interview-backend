@@ -16,6 +16,7 @@ public class CatalogKey {
         return sku;
     }
 
+    @SuppressWarnings("unused")
     public Unit getUnit() {
         return unit;
     }

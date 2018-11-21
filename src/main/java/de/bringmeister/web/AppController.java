@@ -13,19 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 @RestController
 public class AppController {
 
 
+    @SuppressWarnings("unused")
     @Autowired
     private Catalog catalog;
 
     private static final Logger LOG = LoggerFactory.getLogger(AppConfiguration.class);
 
+    @SuppressWarnings("unused")
     public AppController() {
         LOG.info("AppController.AppController() started");
     }
 
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/listAll", method = { RequestMethod.GET }, produces = "application/json")
     @ResponseBody
     public JsonProductList listAll(HttpServletRequest httpRequest, HttpServletResponse httpResponse )
@@ -34,6 +38,7 @@ public class AppController {
         return catalog.listAll();
     }
 
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/showProduct/{sku}", method = { RequestMethod.GET }, produces = "application/json")
     @ResponseBody
     public JsonProductWithAllPrices showProduct(HttpServletRequest httpRequest, HttpServletResponse httpResponse,
@@ -52,6 +57,7 @@ public class AppController {
         return result;
     }
 
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/showPrice/{sku}/{unit}", method = { RequestMethod.GET }, produces = "application/json")
     @ResponseBody
     public JsonProductPrice showPrice(HttpServletRequest httpRequest, HttpServletResponse httpResponse,

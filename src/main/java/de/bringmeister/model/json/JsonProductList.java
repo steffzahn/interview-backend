@@ -6,10 +6,11 @@ public class JsonProductList extends JsonBase {
     public JsonProductList(ArrayList<JsonProductWithAllPrices> list) {
         this.list = list;
     }
+    @SuppressWarnings("unused")
     public JsonProductList() {
     }
 
-    ArrayList<JsonProductWithAllPrices> list;
+    private ArrayList<JsonProductWithAllPrices> list;
 
     public ArrayList<JsonProductWithAllPrices> getList() {
         return list;

@@ -3,7 +3,7 @@ package de.bringmeister.model.json;
 import java.util.ArrayList;
 
 public class JsonPriceList extends JsonBase{
-    ArrayList<JsonPrice> list;
+    private ArrayList<JsonPrice> list;
 
     public ArrayList<JsonPrice> getList() {
         return list;
