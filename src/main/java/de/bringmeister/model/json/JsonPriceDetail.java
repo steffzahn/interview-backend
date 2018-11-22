@@ -17,6 +17,7 @@ public class JsonPriceDetail extends JsonBase {
         return currency;
     }
 
+    @SuppressWarnings("unused")
     public void setCurrency(String currency) {
         this.currency = currency;
     }

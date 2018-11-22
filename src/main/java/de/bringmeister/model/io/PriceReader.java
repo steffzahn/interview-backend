@@ -28,7 +28,7 @@ public class PriceReader {
             if (in == null)
                 throw new ModelException("PriceReader.readFromResource(): resource not found: " + resource);
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            StringBuilder sb = new StringBuilder(1000);
+            @SuppressWarnings("StringBufferReplaceableByString") StringBuilder sb = new StringBuilder(1000);
             sb.append("{\"list\": ");
             sb.append(
                     reader.lines()

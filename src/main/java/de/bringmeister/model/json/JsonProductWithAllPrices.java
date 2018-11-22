@@ -5,6 +5,7 @@ import de.bringmeister.model.Product;
 import java.util.ArrayList;
 
 public class JsonProductWithAllPrices {
+    @SuppressWarnings("unused")
     public JsonProductWithAllPrices(String name, String sku, String description) {
         this.name = name;
         this.sku = sku;
@@ -15,6 +16,7 @@ public class JsonProductWithAllPrices {
         this.sku = p.getSku();
         this.description = p.getDescription();
     }
+    @SuppressWarnings("unused")
     public JsonProductWithAllPrices() {
     }
 
@@ -31,22 +33,27 @@ public class JsonProductWithAllPrices {
         this.name = name;
     }
 
+    @SuppressWarnings("unused")
     public String getSku() {
         return sku;
     }
 
+    @SuppressWarnings("unused")
     public void setSku(String sku) {
         this.sku = sku;
     }
 
+    @SuppressWarnings("unused")
     public String getDescription() {
         return description;
     }
 
+    @SuppressWarnings("unused")
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @SuppressWarnings("unused")
     public ArrayList<JsonProductPrice> getPriceList() {
         return priceList;
     }

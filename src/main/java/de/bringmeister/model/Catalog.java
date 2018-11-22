@@ -22,6 +22,7 @@ public class Catalog {
         skuProductMap = Collections.synchronizedMap(new HashMap<>());
     }
 
+    @SuppressWarnings("unused")
     public synchronized void clear() {
         skuPriceMap.clear();
         skuProductMap.clear();

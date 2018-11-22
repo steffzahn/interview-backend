@@ -1,15 +1,15 @@
 package de.bringmeister.model.json;
 
-import de.bringmeister.model.Currency;
 import de.bringmeister.model.Price;
-import de.bringmeister.model.Unit;
 
 public class JsonProductPrice {
+    @SuppressWarnings("unused")
     public JsonProductPrice(String value, String currency, String unitStr) {
         this.value = value;
         this.currency = currency;
         this.unit = unitStr;
     }
+    @SuppressWarnings("unused")
     public JsonProductPrice() {
     }
     public JsonProductPrice( Price p ) {
@@ -31,18 +31,22 @@ public class JsonProductPrice {
         this.value = value;
     }
 
+    @SuppressWarnings("unused")
     public String getCurrency() {
         return currency;
     }
 
+    @SuppressWarnings("unused")
     public void setCurrency(String currency) {
         this.currency = currency;
     }
 
+    @SuppressWarnings("unused")
     public String getUnit() {
         return unit;
     }
 
+    @SuppressWarnings("unused")
     public void setUnit(String unit) {
         this.unit = unit;
     }

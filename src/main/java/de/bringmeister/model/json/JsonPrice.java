@@ -10,6 +10,7 @@ public class JsonPrice extends JsonBase {
         return price;
     }
 
+    @SuppressWarnings("unused")
     public void setPrice(JsonPriceDetail price) {
         this.price = price;
     }
@@ -26,6 +27,7 @@ public class JsonPrice extends JsonBase {
         return unit;
     }
 
+    @SuppressWarnings("unused")
     public void setUnit(String unit) {
         this.unit = unit;
     }
